@@ -6,10 +6,10 @@ Three algorithms are available, and the **Key** used for each should be the same
 
 Properties
 ----------
-**Key**: Secret key used to hash a message.
-**Message**: Message to be hashed.
-**Algorithm** (advanced): Hashing algorithm to use.
-**Output Attribute** (advanced):
+- **Key**: Secret key used to hash a message.
+- **Message**: Message to be hashed.
+- **Algorithm** (advanced): Hashing algorithm to use.
+- **Output Attribute** (advanced):
 
 Example
 -------
