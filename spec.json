@@ -1,11 +1,11 @@
 {
-  "nio/Example": {
-    "description": "A short summary of the block.",
+  "nio/HMACgenerate": {
+    "description": "Hash messages using standard algorithms.",
     "categories": [
-      ""
+      "signal inspection"
     ],
-    "tags": "",
-    "from_readme": "docs/example_block.md",
-    "from_python": "example_block.Example"
+    "tags": "hash sign verify crypto encrypt algorithm md5 sha1 sha256 sha",
+    "from_readme": "docs/hmac_generate_block.md",
+    "from_python": "hmac_generate_block.HMACgenerate"
   }
 }
