@@ -1,7 +1,7 @@
 {
   "nio/HMACgenerate": {
     "language": "Python",
-    "from_python": "hmac_generate_bock.HMACgenerate",
+    "from_python": "hmac_generate_block.HMACgenerate",
     "url": "git://github.com/nio-blocks/hmac.git"
   }
 }
