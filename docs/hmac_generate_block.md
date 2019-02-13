@@ -6,8 +6,8 @@ Three algorithms are available, and the **Key** used for each should be the same
 
 Properties
 ----------
-- **Key**: Secret key used to hash a message, must be `bytes` or `bytesarray`. If a `string` is used it will be encoded using `UTF-8`
-- **Message**: Message to be hashed, must be `bytes` or `bytesarray`. If a `string` is used it will be encoded using `UTF-8`
+- **Key**: Secret key used to hash a message, must be `bytes`, `bytearray`, or `string`. If a `string` is used it will be encoded using `UTF-8`
+- **Message**: Message to be hashed, must be `bytes`, `bytearray`, or `string`. If a `string` is used it will be encoded using `UTF-8`
 - **Algorithm** (advanced): Hashing algorithm to use.
 - **Output Attribute** (advanced): Signal attribute to contain the hash, default `hash`
 
