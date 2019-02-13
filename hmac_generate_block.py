@@ -3,8 +3,8 @@ import hashlib
 import hmac
 from nio import Block
 from nio.block.mixins import EnrichSignals
-from nio.properties import Property, SelectProperty, StringProperty, \
-    VersionProperty
+from nio.properties import BoolProperty, SelectProperty, StringProperty, \
+    Property, VersionProperty
 
 
 class Algorithms(Enum):
@@ -22,11 +22,15 @@ class HMACgenerate(EnrichSignals, Block):
         title='Hashing Algorithm',
         default=Algorithms.SHA256,
         advanced=True)
+    binary = BoolProperty(
+        title='Binary Output',
+        default=False,
+        advanced=True)
     output = StringProperty(
         title='Output Attribute',
         default='hash',
         advanced=True)
-    version = VersionProperty('0.1.0')
+    version = VersionProperty('0.2.0')
 
     def process_signal(self, signal, input_id=None):
         key = self.key(signal)
@@ -36,8 +40,12 @@ class HMACgenerate(EnrichSignals, Block):
         key, message = self._encode_strings(key, message)
         algorithm = getattr(hashlib, self.algorithm(signal).value)
         message_hash = hmac.new(key, message, algorithm)
+        if not self.binary(signal):
+            output = message_hash.hexdigest()
+        else:
+            output = message_hash.digest()
         out_attr = self.output(signal)
-        signal_dict = {out_attr: message_hash.hexdigest()}
+        signal_dict = {out_attr: output}
         return self.get_output_signal(signal_dict, signal)
 
     def _check_types(self, key, message):
