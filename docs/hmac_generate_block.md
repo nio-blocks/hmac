@@ -2,7 +2,7 @@ HMACgenerate
 =======
 Generate a one-way, unique hash for a **Message** using a **Key** from which the original message and key cannot be deciphered. This is useful for verifying the origin and contents of a message.
 
-The **Key** used for should be the same number of bytes as the resulting hash. Use the following table to determine the proper length for the algorithm used. You can use keys of any length, but values shorter than those given will be zero-padded, and longer keys truncated.
+The **Key** used should be the same number of bytes as the resulting hash. Use the following table to determine the proper length for the algorithm used. You can use keys of any length, but values shorter than those given will be zero-padded, and longer keys truncated.
 
 <table>
 <tr>
