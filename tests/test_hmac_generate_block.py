@@ -1,6 +1,5 @@
 import hashlib
 from unittest.mock import patch, Mock
-from nio.block.terminals import DEFAULT_TERMINAL
 from nio.signal.base import Signal
 from nio.testing.block_test_case import NIOBlockTestCase
 from ..hmac_generate_block import HMACgenerate
@@ -35,11 +34,11 @@ class TestGenerate(NIOBlockTestCase):
         mock_hash_obj.hexdigest.assert_called_once_with()
         mock_hash_obj.digest.assert_not_called()
         self.assert_num_signals_notified(1)
-        self.assertDictEqual(
-            self.last_notified[DEFAULT_TERMINAL][0].to_dict(),
+        self.assert_last_signal_notified(Signal(
             {
                 'bar': 'hash-value'
-            })
+            }
+        ))
 
     @patch('hmac.new')
     def test_signal_enrichment(self, mock_hmac):
@@ -61,12 +60,12 @@ class TestGenerate(NIOBlockTestCase):
         ])
         blk.stop()
         self.assert_num_signals_notified(1)
-        self.assertDictEqual(
-            self.last_notified[DEFAULT_TERMINAL][0].to_dict(),
+        self.assert_last_signal_notified(Signal(
             {
                 'message': b'an important message',
                 'hash': 'hash-value',
-            })
+            }
+        ))
 
     @patch('hmac.new')
     def test_algorithm_selection(self, mock_hmac):
