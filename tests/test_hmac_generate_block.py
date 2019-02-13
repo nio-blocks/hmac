@@ -48,13 +48,13 @@ class TestGenerate(NIOBlockTestCase):
         blk = HMACgenerate()
         config = {
             'enrich': {'exclude_existing': False},
-            'message': 'an important message',
+            'message': '{{ $message }}',
         }
         self.configure_block(blk, config)
         blk.start()
         blk.process_signals([
             Signal({
-                'et': 'cetera',
+                'message': 'an important message',
             }),
         ])
         blk.stop()
@@ -62,7 +62,7 @@ class TestGenerate(NIOBlockTestCase):
         self.assertDictEqual(
             self.last_notified[DEFAULT_TERMINAL][0].to_dict(),
             {
-                'et': 'cetera',
+                'message': 'an important message',
                 'hash': 'hash-value',
             })
 
