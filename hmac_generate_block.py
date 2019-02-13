@@ -12,6 +12,8 @@ class Algorithms(Enum):
     MD5 = 'md5'
     SHA1 = 'sha1'
     SHA256 = 'sha256'
+    SHA384 = 'sha384'
+    SHA512 = 'sha512'
 
 class HMACgenerate(EnrichSignals, Block):
 
@@ -30,7 +32,7 @@ class HMACgenerate(EnrichSignals, Block):
         title='Output Attribute',
         default='hash',
         advanced=True)
-    version = VersionProperty('0.2.0')
+    version = VersionProperty('0.2.1')
 
     def process_signal(self, signal, input_id=None):
         key = self.key(signal)

@@ -2,13 +2,40 @@ HMACgenerate
 =======
 Generate a one-way, unique hash for a **Message** using a **Key** from which the original message and key cannot be deciphered. This is useful for verifying the origin and contents of a message.
 
-Three algorithms are available, and the **Key** used for each should be the same number of bytes as the resulting hash. So the key for MD5 should be 16 characters, SHA1 should be 20, and SHA256 32. You can use keys of any length, but values shorter than those given will be zero-padded, and longer keys truncated.
+The **Key** used should be the same number of bytes as the resulting hash. Use the following table to determine the proper length for the algorithm used. You can use keys of any length, but values shorter than those given will be zero-padded, and longer keys truncated.
+
+<table>
+<tr>
+<th>Hashing Algorithm</th>
+<th>Key Length</th>
+</tr>
+<tr>
+<td>MD5</td>
+<td>16</td>
+</tr>
+<tr>
+<td>SHA1</td>
+<td>20</td>
+</tr>
+<tr>
+<td>SHA256</td>
+<td>32</td>
+</tr>
+<tr>
+<td>SHA384</td>
+<td>48</td>
+</tr>
+<tr>
+<td>SHA512</td>
+<td>64</td>
+</tr>
+</table>
 
 Properties
 ----------
 - **Key**: Secret key used to hash a message, must be `bytes`, `bytearray`, or `string`. If a `string` is used it will be encoded using `UTF-8`
 - **Message**: Message to be hashed, must be `bytes`, `bytearray`, or `string`. If a `string` is used it will be encoded using `UTF-8`
-- **Algorithm** (advanced): Hashing algorithm to use.
+- **Hashing Algorithm** (advanced): Hashing algorithm to use.
 - **Binary Output** (advanced): Output hash bytes instead of the standard hex string.
 - **Output Attribute** (advanced): Signal attribute to contain the hash, default `hash`
 
