@@ -35,7 +35,7 @@ Properties
 ----------
 - **Key**: Secret key used to hash a message, must be `bytes`, `bytearray`, or `string`. If a `string` is used it will be encoded using `UTF-8`
 - **Message**: Message to be hashed, must be `bytes`, `bytearray`, or `string`. If a `string` is used it will be encoded using `UTF-8`
-- **Hashing Algorithm** (advanced): Hashing algorithm to use.
+- **Hashing Algorithm** (advanced): Hashing algorithm to use, default SHA256
 - **Binary Output** (advanced): Output hash bytes instead of the standard hex string.
 - **Output Attribute** (advanced): Signal attribute to contain the hash, default `hash`
 
