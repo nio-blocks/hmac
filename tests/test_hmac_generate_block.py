@@ -24,8 +24,8 @@ class TestGenerate(NIOBlockTestCase):
         blk.start()
         blk.process_signals([
             Signal({
-                'key': 'foo',
-                'message': 'an important message',
+                'key': b'foo',
+                'message': b'an important message',
                 'output': 'bar',
             }),
         ])
@@ -54,7 +54,7 @@ class TestGenerate(NIOBlockTestCase):
         blk.start()
         blk.process_signals([
             Signal({
-                'message': 'an important message',
+                'message': b'an important message',
             }),
         ])
         blk.stop()
@@ -62,7 +62,7 @@ class TestGenerate(NIOBlockTestCase):
         self.assertDictEqual(
             self.last_notified[DEFAULT_TERMINAL][0].to_dict(),
             {
-                'message': 'an important message',
+                'message': b'an important message',
                 'hash': 'hash-value',
             })
 
@@ -72,7 +72,8 @@ class TestGenerate(NIOBlockTestCase):
         blk = HMACgenerate()
         config = {
             'algorithm': '{{ $algorithm }}',
-            'message': 'an important message',
+            'key': b'foobarbaz',
+            'message': b'an important message',
         }
         self.configure_block(blk, config)
         blk.start()
@@ -90,10 +91,39 @@ class TestGenerate(NIOBlockTestCase):
         blk.stop()
         self.assertEqual(
             mock_hmac.call_args_list[0][0],
-            (b'[[HMAC_KEY]]', b'an important message', hashlib.md5))
+            (b'foobarbaz', b'an important message', hashlib.md5))
         self.assertEqual(
             mock_hmac.call_args_list[1][0],
-            (b'[[HMAC_KEY]]', b'an important message', hashlib.sha1))
+            (b'foobarbaz', b'an important message', hashlib.sha1))
         self.assertEqual(
             mock_hmac.call_args_list[2][0],
-            (b'[[HMAC_KEY]]', b'an important message', hashlib.sha256))
+            (b'foobarbaz', b'an important message', hashlib.sha256))
+
+    @patch('hmac.new')
+    def test_string_encoding(self, mock_hmac):
+        """Key and Message are encoded to bytes if given a string."""
+        blk = HMACgenerate()
+        config = {
+            'key': 'foobarbaz',
+            'message': 'an important message',
+        }
+        self.configure_block(blk, config)
+        blk.start()
+        blk.process_signals([Signal()])
+        blk.stop()
+        self.assertEqual(
+            mock_hmac.call_args_list[0][0],
+            (b'foobarbaz', b'an important message', hashlib.sha1))
+
+    @patch('hmac.new')
+    def test_invalid_types(self, mock_hmac):
+        """Message to be hashed is not a valid type, and is handled."""
+        blk = HMACgenerate()
+        config = {
+            'message': 3.14159,
+        }
+        self.configure_block(blk, config)
+        blk.start()
+        blk.process_signals([Signal()])
+        blk.stop()
+        mock_hmac.assert_not_called()

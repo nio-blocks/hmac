@@ -6,8 +6,8 @@ Three algorithms are available, and the **Key** used for each should be the same
 
 Properties
 ----------
-- **Key**: Secret key used to hash a message.
-- **Message**: Message to be hashed.
+- **Key**: Secret key used to hash a message, must be `bytes` or `bytesarray`. If a `string` is used it will be encoded using `UTF-8`
+- **Message**: Message to be hashed, must be `bytes` or `bytesarray`. If a `string` is used it will be encoded using `UTF-8`
 - **Algorithm** (advanced): Hashing algorithm to use.
 - **Output Attribute** (advanced): Signal attribute to contain the hash, default `hash`
 
@@ -18,7 +18,7 @@ The simplest use of this block is to add a hash checksum to a message:
 ```
 Key: foobarbaz
 Message: {{ $message }}
-Hashing Algorithm: MD5
+Hashing Algorithm: SHA1
 Exclude Existing: False
 ```
 <table width=100%>
@@ -41,7 +41,7 @@ Exclude Existing: False
 [
   {
     "message": "This is the song that never ends.",
-    "hash": "48f18105bf00e018462ba75e794e5b7e"
+    "hash": "543180c77598d21ad93d1c4f1c339be04a836fce"
   }
 ]
 </pre>
