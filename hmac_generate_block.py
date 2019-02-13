@@ -32,7 +32,7 @@ class HMACgenerate(EnrichSignals, Block):
         message_bytes = bytes(self.message(signal), 'utf-8')
         key_bytes = bytes(self.key(signal), 'utf-8')
         algorithm = getattr(hashlib, self.algorithm(signal).value)
-        hash = hmac.new(key_bytes, message_bytes, algorithm).hexdigest()
+        message_hash = hmac.new(key_bytes, message_bytes, algorithm).hexdigest()
         out_attr = self.output(signal)
         signal_dict = {out_attr: hash}
         return self.get_output_signal(signal_dict, signal)
