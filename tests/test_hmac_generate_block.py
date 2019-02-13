@@ -137,12 +137,12 @@ class TestGenerate(NIOBlockTestCase):
         mock_hmac.return_value = mock_hash_obj
         blk = HMACgenerate()
         config = {
-            'binary': True,
+            'binary': '{{ $binary }}',
             'message': 'an important message',
         }
         self.configure_block(blk, config)
         blk.start()
-        blk.process_signals([Signal()])
+        blk.process_signals([Signal({'binary': True})])
         blk.stop()
         mock_hash_obj.digest.assert_called_once_with()
         mock_hash_obj.hexdigest.assert_not_called()

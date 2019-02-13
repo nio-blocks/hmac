@@ -40,7 +40,7 @@ class HMACgenerate(EnrichSignals, Block):
         key, message = self._encode_strings(key, message)
         algorithm = getattr(hashlib, self.algorithm(signal).value)
         message_hash = hmac.new(key, message, algorithm)
-        if not self.binary():
+        if not self.binary(signal):
             output = message_hash.hexdigest()
         else:
             output = message_hash.digest()
