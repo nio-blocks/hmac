@@ -134,7 +134,6 @@ class TestGenerate(NIOBlockTestCase):
     def test_binary_output(self, mock_hmac):
         """Optional binary output instead of hexdigest."""
         mock_hash_obj = Mock()
-        mock_hash_obj.digest.return_value = 'binary-hash'
         mock_hmac.return_value = mock_hash_obj
         blk = HMACgenerate()
         config = {
