@@ -88,6 +88,12 @@ class TestGenerate(NIOBlockTestCase):
             Signal({
                 'algorithm': 'sha256',
             }),
+            Signal({
+                'algorithm': 'sha384',
+            }),
+            Signal({
+                'algorithm': 'sha512',
+            }),
         ])
         blk.stop()
         self.assertEqual(
@@ -99,6 +105,12 @@ class TestGenerate(NIOBlockTestCase):
         self.assertEqual(
             mock_hmac.call_args_list[2][0],
             (b'foobarbaz', b'an important message', hashlib.sha256))
+        self.assertEqual(
+            mock_hmac.call_args_list[3][0],
+            (b'foobarbaz', b'an important message', hashlib.sha384))
+        self.assertEqual(
+            mock_hmac.call_args_list[4][0],
+            (b'foobarbaz', b'an important message', hashlib.sha512))
 
     @patch('hmac.new')
     def test_string_encoding(self, mock_hmac):
