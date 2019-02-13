@@ -49,7 +49,7 @@ Exclude Existing: False
 </tr>
 </table>
 
-Person A sends a message and its hash to Person B who shares the secret key. Person B hashes the received message with their key and compares it to the received hash. If equal, the message's contents have not been altered and can only have originated from someone with the secret key.
+Person A sends a message and its hash to Person B who shares the secret key. Person B generates a hash for the received message with their key and compares it to the received hash. If equal, the message's contents have not been altered and can only have originated from someone with the secret key.
 
 Commands
 --------
