@@ -32,6 +32,8 @@ class TestGenerate(NIOBlockTestCase):
         blk.stop()
         mock_hmac.assert_called_once_with(
             b'foo', b'an important message', hashlib.sha256)
+        mock_hash_obj.hexdigest.assert_called_once_with()
+        mock_hash_obj.digest.assert_not_called()
         self.assert_num_signals_notified(1)
         self.assertDictEqual(
             self.last_notified[DEFAULT_TERMINAL][0].to_dict(),
@@ -127,3 +129,21 @@ class TestGenerate(NIOBlockTestCase):
         blk.process_signals([Signal()])
         blk.stop()
         mock_hmac.assert_not_called()
+
+    @patch('hmac.new')
+    def test_binary_output(self, mock_hmac):
+        """Optional binary output instead of hexdigest."""
+        mock_hash_obj = Mock()
+        mock_hash_obj.digest.return_value = 'binary-hash'
+        mock_hmac.return_value = mock_hash_obj
+        blk = HMACgenerate()
+        config = {
+            'binary': True,
+            'message': 'an important message',
+        }
+        self.configure_block(blk, config)
+        blk.start()
+        blk.process_signals([Signal()])
+        blk.stop()
+        mock_hash_obj.digest.assert_called_once_with()
+        mock_hash_obj.hexdigest.assert_not_called()
