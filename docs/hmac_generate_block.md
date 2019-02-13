@@ -29,6 +29,7 @@ The **Key** used for should be the same number of bytes as the resulting hash. U
 <td>SHA512</td>
 <td>64</td>
 </tr>
+</table>
 
 Properties
 ----------
