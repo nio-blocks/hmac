@@ -31,7 +31,7 @@ class TestGenerate(NIOBlockTestCase):
         ])
         blk.stop()
         mock_hmac.assert_called_once_with(
-            b'foo', b'an important message', hashlib.md5)
+            b'foo', b'an important message', hashlib.sha1)
         self.assert_num_signals_notified(1)
         self.assertDictEqual(
             self.last_notified[DEFAULT_TERMINAL][0].to_dict(),
