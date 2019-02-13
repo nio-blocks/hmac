@@ -31,7 +31,7 @@ class TestGenerate(NIOBlockTestCase):
         ])
         blk.stop()
         mock_hmac.assert_called_once_with(
-            b'foo', b'an important message', hashlib.sha1)
+            b'foo', b'an important message', hashlib.sha256)
         self.assert_num_signals_notified(1)
         self.assertDictEqual(
             self.last_notified[DEFAULT_TERMINAL][0].to_dict(),
@@ -113,7 +113,7 @@ class TestGenerate(NIOBlockTestCase):
         blk.stop()
         self.assertEqual(
             mock_hmac.call_args_list[0][0],
-            (b'foobarbaz', b'an important message', hashlib.sha1))
+            (b'foobarbaz', b'an important message', hashlib.sha256))
 
     @patch('hmac.new')
     def test_invalid_types(self, mock_hmac):

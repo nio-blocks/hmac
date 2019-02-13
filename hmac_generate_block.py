@@ -20,7 +20,7 @@ class HMACgenerate(EnrichSignals, Block):
     algorithm = SelectProperty(
         Algorithms,
         title='Hashing Algorithm',
-        default=Algorithms.SHA1,
+        default=Algorithms.SHA256,
         advanced=True)
     output = StringProperty(
         title='Output Attribute',

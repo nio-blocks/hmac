@@ -18,7 +18,7 @@ The simplest use of this block is to add a hash checksum to a message:
 ```
 Key: foobarbaz
 Message: {{ $message }}
-Hashing Algorithm: SHA1
+Hashing Algorithm: SHA256
 Exclude Existing: False
 ```
 <table width=100%>
@@ -41,7 +41,7 @@ Exclude Existing: False
 [
   {
     "message": "This is the song that never ends.",
-    "hash": "543180c77598d21ad93d1c4f1c339be04a836fce"
+    "hash": "ca03e75cd1116e5fa9a1b4cec26cb11d59d98db90a8ff185219af4537af7c2ec"
   }
 ]
 </pre>
