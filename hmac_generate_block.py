@@ -34,5 +34,5 @@ class HMACgenerate(EnrichSignals, Block):
         algorithm = getattr(hashlib, self.algorithm(signal).value)
         message_hash = hmac.new(key_bytes, message_bytes, algorithm).hexdigest()
         out_attr = self.output(signal)
-        signal_dict = {out_attr: hash}
+        signal_dict = {out_attr: message_hash}
         return self.get_output_signal(signal_dict, signal)
