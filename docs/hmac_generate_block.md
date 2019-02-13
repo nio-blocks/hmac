@@ -9,7 +9,7 @@ Properties
 - **Key**: Secret key used to hash a message.
 - **Message**: Message to be hashed.
 - **Algorithm** (advanced): Hashing algorithm to use.
-- **Output Attribute** (advanced):
+- **Output Attribute** (advanced): Signal attribute to contain the hash, default `hash`
 
 Example
 -------
