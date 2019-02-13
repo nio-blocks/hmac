@@ -16,8 +16,6 @@ class HMACgenerate(EnrichSignals, Block):
 
     key = StringProperty(title='Key', default='[[HMAC_KEY]]')
     message = StringProperty(title='Message')
-    version = VersionProperty('0.1.0')
-
     algorithm = SelectProperty(
         Algorithms,
         title='Hashing Algorithm',
@@ -27,6 +25,7 @@ class HMACgenerate(EnrichSignals, Block):
         title='Output Attribute',
         default='hash',
         advanced=True)
+    version = VersionProperty('0.1.0')
 
     def process_signal(self, signal, input_id=None):
         message_bytes = bytes(self.message(signal), 'utf-8')
