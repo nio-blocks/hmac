@@ -2,7 +2,7 @@
   "nio/HMACgenerate": {
     "description": "Hash messages using standard algorithms.",
     "categories": [
-      "signal inspection"
+      "security"
     ],
     "tags": "hash sign verify crypto encrypt algorithm md5 sha1 sha256 sha",
     "from_readme": "docs/hmac_generate_block.md",
